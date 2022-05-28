@@ -58,7 +58,7 @@ async function run() {
         app.get('/admin/:email', async (req, res) => {
             const email = req.params.email;
             const user = await usersCollection.findOne({ email: email });
-            const isAdmin = user.role === 'admin';
+            const isAdmin = user?.role === 'admin';
             res.send({ admin: isAdmin });
         })
 
@@ -88,7 +88,9 @@ async function run() {
 
         app.post('/product', verifyJWT, verifyAdmin, async (req, res) => {
             const product = req.body.product;
-            const result = await productCollection.insertOne({ product });
+            console.log(req.body)
+            console.log(product)
+            const result = await productCollection.insertOne( product );
             console.log(result);
             res.send(result);
         })
@@ -306,6 +308,6 @@ app.get('/', (req, res) => {
     res.send('Hello From NNABI PPML')
 })
 
-// app.listen(port, () => {
-//     console.log(`listening on port ${port}`)
-// })
+app.listen(port, () => {
+    console.log(`listening on port ${port}`)
+})
