@@ -87,7 +87,7 @@ async function run() {
 
 
         app.post('/product', verifyJWT, verifyAdmin, async (req, res) => {
-            const product = req.body;
+            const product = req.body.product;
             const result = await productCollection.insertOne({ product });
             console.log(result);
             res.send(result);
@@ -303,9 +303,9 @@ run().catch(console.dir)
 
 
 app.get('/', (req, res) => {
-    res.send('Hello From NNABI Hospital')
+    res.send('Hello From NNABI PPML')
 })
 
-app.listen(port, () => {
-    console.log(`listening on port ${port}`)
-})
+// app.listen(port, () => {
+//     console.log(`listening on port ${port}`)
+// })
